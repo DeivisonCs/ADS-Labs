@@ -25,7 +25,7 @@ def show_img(img):
 
 def slide_show(Slide):
     for img in Slide:
-        show_img(Slide.pop())
+        show_img(img)
         
 
 def main():
