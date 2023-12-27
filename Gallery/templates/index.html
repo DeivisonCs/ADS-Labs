@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Gallery.css' %}">
+
+    <title>Gallery</title>
+</head>
+<body>
+    <div id="image_view" style="display: none">
+        <!-- Inserido via Script -->
+    </div>
+
+    <header class="img_on_bg">
+        <h1><span class="small">My</span>Gallery</h1>
+    </header>
+
+    <main id="main_content">
+        {% block content %}
+        {% for post in Posts %}
+        <div class="img_on_bg bg_4 post_content">
+            <div class="transparence">
+                <div class="content">
+                    <span class="title">{{ post.author }}</span>
+                
+                    <ul id="post_imgs">
+                        {% for img_file in post.posted_imgs.all %}
+                            <li><img src="{{ img_file.img.url }}" id="{{ img_file.img.url }}" class="image_on_list" alt="Imagem"></li>
+                        {% endfor %}
+                    </ul>
+
+                    <div class="about">
+                        <h2>{{ post.title }}</h2>
+                        <p>{{ post.text }}</p>
+                    </div>
+                    
+                    <a href="{% url 'view_album' pk=post.pk %}">Ver Album</a>
+                    <span class="create_date">{{ post.created_date }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% endblock %}
+    </main>
+
+
+    <script>
+        post = document.getElementById('main_content');
+        Image_View =  document.getElementById('image_view');
+
+        post.addEventListener("click", function(e) {
+
+            if(e.target.closest(".image_on_list") != null){
+
+                const img = e.target.closest(".image_on_list").id;
+                Image_View.style.display="block";
+                
+                Image_View.innerHTML = show_img(img);
+            }
+        })
+
+        Image_View.addEventListener("click", (e) => {
+
+            if(e.target.closest("#view_return_button")){
+                Image_View.style.display="none";
+            }
+        })
+
+        function show_img(url){
+            return `<div>
+                <span id="view_return_button">
+                    <span class="material-symbols-outlined"> arrow_back</span>
+                </span>
+                <img src="${url}" alt="Imagem">
+            </div>`
+        } 
+    </script>
+</body>
+</html>

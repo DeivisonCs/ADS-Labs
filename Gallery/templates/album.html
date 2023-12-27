@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Fontes -->
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+     <!-- Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+     <!-- Css -->
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" href="{% static 'css/album.css' %}">
+
+    <title>Album {{ album.author }}</title>
+</head>
+<body>
+    <div id="image_view" style="display: none">
+        <!-- Inserido via Script -->
+    </div>
+
+    <header class="img_on_bg logo_header">
+        <h1><small>My</small>Gallery</h1>
+    </header>
+
+    <main id="album_body">
+        <header id="album_header">
+            <div class="light_mode_on" id="light_controls">
+                <span class="material-symbols-outlined" id="light_mode">light_mode</span>
+                <span class="material-symbols-outlined" id="dark_mode">dark_mode</span>
+            </div>
+            
+            <h2>{{ album.title }}</h2>
+            <h3 class="small author">Album By {{ album.author }}</h3>
+            
+            <p class="album_description">{{ album.text }}</p>
+        </header>
+
+        <ul class="all_images" id="display_images">
+            {% for img in album.posted_imgs.all %}
+                <li><img src="{{ img.img.url }}" id="{{ img.img.url }}" class="image" alt=""></li>
+            {% endfor %}
+        </ul>
+    </main>
+
+    <footer id="album_footer"><span class="publish_date">{{ album.created_date }}</span></footer>
+
+    <script>
+        const image_view = document.getElementById('image_view');
+        const images = document.getElementById('display_images');
+        const mode_controls = document.getElementById('light_controls')
+
+        images.addEventListener('click', (e) => {
+
+            if(e.target.closest('.image').id){
+                const url = e.target.closest('.image').id;
+                image_view.style.display = "block";
+
+                image_view.innerHTML = show_image(url);
+            }
+        })
+
+        image_view.addEventListener("click", (e) => {
+
+            if(e.target.closest("#view_return_button")){
+                image_view.style.display="none";
+            }
+        })
+
+        function show_image(url){   
+            return `
+            <div>
+                <span id="view_return_button">
+                    <span class="material-symbols-outlined"> arrow_back</span>
+                </span>
+                <img src="${url}" alt="Imagem">
+            </div>`
+        }
+
+        mode_controls.addEventListener('click', (e) => {
+            const mode = e.target.id;
+
+            const album_body = document.getElementById('album_body');
+            const album_header = document.getElementById('album_header');
+            const album_footer = document.getElementById('album_footer');
+
+            if(mode == 'dark_mode'){
+                mode_controls.className = "dark_mode_on";          
+
+                album_body.style.backgroundColor = 'rgb(46, 46, 46)'
+                album_header.style.color = '#fff'
+                album_footer.style.backgroundColor = '#000'
+                image_view.style.backgroundColor = 'rgb(30, 30, 30)'
+            }
+            else if(mode == 'light_mode'){
+                mode_controls.className = "light_mode_on";
+                
+                album_body.style.backgroundColor = '#fff'
+                album_header.style.color = '#000'
+                album_footer.style.backgroundColor = 'rgb(51, 51, 51)'
+                image_view.style.backgroundColor = '#fff'
+            }
+        })
+    </script>
+  
+</body>
+</html>
