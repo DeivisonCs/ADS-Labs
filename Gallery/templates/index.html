@@ -21,6 +21,9 @@
     <header class="img_on_bg">
         <h1><span class="small">My</span>Gallery</h1>
     </header>
+    <nav class="main_nav">
+        <a href="{% url 'new_album' %}">New Album <span class="glyphicon glyphicon-plus"></span></a>
+    </nav>
 
     <main id="main_content">
         {% block content %}

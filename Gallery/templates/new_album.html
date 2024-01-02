@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Fontes -->
+     <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+      <!-- Css -->
+     <link rel="stylesheet" href="{% static 'css/global.css' %}">
+     <link rel="stylesheet" href="{% static 'css/new_album.css' %}">
+
+    <title>New Album</title>
+</head>
+<body>
+    <header class="img_on_bg">
+        <h1><small>My</small>Gallery</h1>
+    </header>
+
+    <h2>New Album</h2>
+
+    <main>
+        {% block content %}
+        <form method="post" enctype="multipart/form-data"> {% csrf_token %}
+            <label class="must_fill">Author</label>
+            <input type="text" name="author" autocomplete="off" required>
+
+            <label class="must_fill">Title</label>
+            <input type="text" name="title" autocomplete="off" required>
+
+            <label>Imagens</label>
+            <input type="file" name="imgs" multiple required>
+            
+            <label>Text</label>
+            <textarea name="text" cols="50" rows="10"></textarea>
+
+            <button type="submit">Save</button>
+        </form>
+        {% endblock %}
+    </main>
+
+</body>
+</html>

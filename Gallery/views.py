@@ -1,37 +1,39 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Img_Files
-import cv2
+from django.utils import timezone
+from . import features
 
 def gallery_posts(request):
     All_Posts = Post.objects.all()
     return render(request, 'index.html', {'Posts': All_Posts})
 
+
 def view_album(request, pk):
     album = get_object_or_404(Post, pk=pk)
 
-    Images = get_image_path(album)
-    slide_images(Images)
+    # Images = features.get_image_path(album)
+    # features.slide_images(Images)
 
     return render(request, 'album.html', {'album':album} )
 
-def get_image_path(post):
-    Images = []
 
-    for img in post.posted_imgs.all():
-        path =(f"Gallery{img.img.url}")
-        # print(path)
-        
-        Images.append(cv2.imread(path))
- 
-    return Images
+def new_album(request):
+    if request.method == "POST":
+        new_post = Post.objects.create(
+            author = request.POST['author'],
+            title = request.POST['title'],
+            text = request.POST['text'],
+            created_date = timezone.now()
+        )
 
-def slide_images(images):
-    for img in images:
-        try:
-            # print(img) 
-            cv2.imshow('Image', img)
-            cv2.waitKey(0)
-        except Exception as e:
-            print(f'Erro: {e}')
+        imagens = request.FILES.getlist('imgs')
+        for img in imagens:
+            img_file = Img_Files.objects.create(img=img)
+            new_post.posted_imgs.add(img_file)
         
-    cv2.destroyAllWindows()
+        new_post.save()
+
+        return redirect('view_album', pk=new_post.pk)
+    
+    else:
+        return render (request, 'new_album.html')
