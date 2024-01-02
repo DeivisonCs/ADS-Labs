@@ -22,7 +22,9 @@
         <h1><span class="small">My</span>Gallery</h1>
     </header>
     <nav class="main_nav">
+        {% if user.is_authenticated %}
         <a href="{% url 'new_album' %}">New Album <span class="glyphicon glyphicon-plus"></span></a>
+        {% endif %}
     </nav>
 
     <main id="main_content">

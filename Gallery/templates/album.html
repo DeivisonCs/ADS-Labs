@@ -25,6 +25,12 @@
     <header class="img_on_bg logo_header">
         <h1><small>My</small>Gallery</h1>
     </header>
+    <nav class="main_nav">
+        <a href="{% url 'gallery_posts' %}">Home</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'new_album' %}">New Album <span class="glyphicon glyphicon-plus"></span></a>
+        {% endif %}
+    </nav>
 
     <main id="album_body">
         <header id="album_header">
