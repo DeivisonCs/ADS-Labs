@@ -236,13 +236,13 @@ main div .content ul::-webkit-scrollbar-thumb {
     background-color: #ffffff;
     border: solid 2px black;
     border-radius: 50%;
-    box-shadow: 2px 2px 2px grey;
     cursor: pointer;
 }
 
 #image_view #view_return_button:hover {
-    width: 100px;
-    border-radius: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
     transition: 0.7s;
 }
 
