@@ -29,6 +29,7 @@
         <a href="{% url 'gallery_posts' %}">Home</a>
         {% if user.is_authenticated %}
         <a href="{% url 'new_album' %}">New Album <span class="glyphicon glyphicon-plus"></span></a>
+        <a href="{% url 'remove_album' pk=album.pk %}">Remove Album <span class="glyphicon glyphicon-minus"></span></a>
         {% endif %}
     </nav>
 

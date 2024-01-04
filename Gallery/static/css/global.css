@@ -4,3 +4,13 @@
     box-sizing: border-box;
     font-family: 'Lobster', Georgia, 'Times New Roman', Times, serif;
 }
+
+/* ALERT MESSAGES */
+ul.messages {
+    margin: 0;
+}
+ul.messages li {
+    list-style: none;
+    letter-spacing: 1px;
+    margin: 0;
+}

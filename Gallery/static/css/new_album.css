@@ -130,3 +130,8 @@ main form button {
     width: 100px;
     border-radius: 20px;
 }
+
+button:hover {
+    cursor: pointer;
+    background-color: darkgrey;
+}
