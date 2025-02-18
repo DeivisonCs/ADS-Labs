@@ -21,10 +21,15 @@
         <a href="{% url 'gallery_posts' %}">Home</a>
     </nav>
 
+    {% if not post %}
     <h2>New Album</h2>
+    {% else %}
+    <h2>Update Album</h2>
+    {% endif %}
 
     <main>
         {% block content %}
+        {% if not post %}
         <form method="post" enctype="multipart/form-data"> {% csrf_token %}
             <label class="must_fill">Author</label>
             <input type="text" name="author" autocomplete="off" required>
@@ -32,14 +37,29 @@
             <label class="must_fill">Title</label>
             <input type="text" name="title" autocomplete="off" required>
 
-            <label>Imagens</label>
+            <label>Images</label>
             <input type="file" name="imgs" multiple required>
             
             <label>Text</label>
             <textarea name="text" cols="50" rows="10"></textarea>
-
+            
             <button type="submit">Save</button>
         </form>
+        {% else %}
+        <form method="post" enctype="multipart/form-data"> {% csrf_token %}
+            <label class="must_fill">Author</label>
+            <input type="text" value="{{post.author}}" name="update_author" autocomplete="off" required>
+
+            <label class="must_fill">Title</label>
+            <input type="text" value="{{post.title}}" name="title" autocomplete="off" required>
+
+            <label>Text</label>
+            <textarea name="text" cols="50" rows="10">{{post.text}}</textarea>
+            
+            <button type="submit">Update</button>
+        </form>
+        {% endif %}
+
         {% endblock %}
     </main>
 

@@ -19,26 +19,42 @@ def view_album(request, pk):
     return render(request, 'album.html', {'album':album} )
 
 
-def new_album(request):
+def new_album(request, pk=''):
     if request.method == "POST":
-        new_post = Post.objects.create(
-            author = request.POST['author'],
-            title = request.POST['title'],
-            text = request.POST['text'],
-            created_date = timezone.now()
-        )
-
-        imagens = request.FILES.getlist('imgs')
-        for img in imagens:
-            img_file = Img_Files.objects.create(img=img)
-            new_post.posted_imgs.add(img_file)
         
-        new_post.save()
+        if 'update_author' in request.POST:
+            post = get_object_or_404(Post, pk=pk)
+        
+            post.author = request.POST['update_author']
+            post.title = request.POST['title']
+            post.text = request.POST['text']
+            
+            post.save()
+            return redirect('view_album', pk=post.pk)
+        
+        else:
+            new_post = Post.objects.create(
+                author = request.POST['author'],
+                title = request.POST['title'],
+                text = request.POST['text'],
+                created_date = timezone.now()
+            )
 
-        return redirect('view_album', pk=new_post.pk)
-    
+            imagens = request.FILES.getlist('imgs')
+            for img in imagens:
+                img_file = Img_Files.objects.create(img=img)
+                new_post.posted_imgs.add(img_file)
+            
+            new_post.save()
+            return redirect('view_album', pk=new_post.pk)
+
     else:
-        return render (request, 'new_album.html')
+        if pk != '':
+            post = get_object_or_404(Post, pk=pk)
+            return render (request, 'new_album.html', {'post':post})
+        else:
+            return render (request, 'new_album.html')
+            
     
 def remove_album(request, pk):
     album = get_object_or_404(Post, pk=pk)
