@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 
+PORT = os.getenv('PORT', '10000')
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,7 +28,7 @@ SECRET_KEY = 'django-insecure-(d#vvnl$x!k66$*rpwa528b8kcl%eu5esa6iv$6c!f#yr&t(&7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', "*"]
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', '*']
 
 
 # Application definition
