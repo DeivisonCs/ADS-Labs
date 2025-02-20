@@ -75,3 +75,15 @@ def remove_album(request, pk):
 
     return redirect('gallery_posts')
     
+def remove_photo(request, pk):
+    imgUrl = request.GET.get("imgUrl")
+    album = get_object_or_404(Post, pk=pk)
+
+    img_to_delete = album.posted_imgs.filter(img=imgUrl).first()
+
+    if img_to_delete:
+        img_to_delete.delete()
+    
+    album.save()
+
+    return redirect('view_album', pk=pk)

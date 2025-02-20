@@ -190,12 +190,12 @@ main .all_images li:last-child{
     cursor: pointer;
 }
 
-#image_view #view_return_button:hover {
+/* #image_view #view_return_button:hover {
     width: 60px;
     height: 60px;
     border-radius: 50%;
     transition: 0.7s;
-}
+} */
 
 #image_view #view_return_button:active {
     box-shadow: 2px 2px 2px rgb(88, 88, 88) inset;
@@ -218,6 +218,27 @@ main .all_images li:last-child{
     max-height: 100%;
     max-width: 100%;
 }
+
+#image_view div a {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 1px;
+    padding: 5px 8px;
+    border-radius: 5px;
+}
+
+a.critical-button {
+    background-color: #ff0000a2;
+    
+}
+a.critical-button:hover {
+    background-color: #ff0000e3;
+}
+
 
 @media screen and (max-width: 800px) {
     #image_view #view_return_button {

@@ -29,8 +29,8 @@
             <a href="{% url 'gallery_posts' %}">Home</a>
             {% if user.is_authenticated %}
             <a href="{% url 'new_album' %}">New Album <span class="glyphicon glyphicon-plus"></span></a>
-            <a href="{% url 'remove_album' pk=album.pk %}">Remove Album <span class="glyphicon glyphicon-minus"></span></a>
             <a href="{% url 'new_album' pk=album.pk %}">Editar Album <span class="glyphicon glyphicon-minus"></span></a>
+            <a href="{% url 'remove_album' pk=album.pk %}" class="critical-button">Remover Album <span class="glyphicon glyphicon-minus"></span></a>
             {% endif %}
         </nav>
     </header>
@@ -68,7 +68,7 @@
                 const url = e.target.closest('.image').id;
                 image_view.style.display = "block";
 
-                image_view.innerHTML = show_image(url);
+                image_view.innerHTML = show_image(url, url.replace('/media/', ''));
             }
         })
 
@@ -79,13 +79,14 @@
             }
         })
 
-        function show_image(url){   
+        function show_image(url, imgUrl){   
             return `
             <div>
                 <span id="view_return_button">
                     <span class="material-symbols-outlined"> arrow_back</span>
                 </span>
                 <img src="${url}" alt="Imagem">
+                <a class="remove_photo_button critical-button" href="{% url 'remove_photo' pk=album.pk %}?imgUrl=${imgUrl}">Remover Foto <span class="glyphicon glyphicon-minus"></span></a>
             </div>`
         }
 

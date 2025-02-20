@@ -5,5 +5,6 @@ urlpatterns = [
     path('', views.gallery_posts, name='gallery_posts'),
     path('/view', views.view_album, name='view_album'),
     path('/remove', views.remove_album, name='remove_album'),
+    path('/remove_photo', views.remove_photo, name='remove_photo'),
     path('Gallery/New_Album', views.new_album, name='new_album'),
 ]
