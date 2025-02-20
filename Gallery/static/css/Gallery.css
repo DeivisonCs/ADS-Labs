@@ -12,7 +12,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url(../imgs/7.1.jpg);
+    position: relative;
+    background-image: url(../imgs/8.jpg);
     background-size: contain;
     background-repeat: no-repeat;
     /* opacity: .9; */
@@ -38,11 +39,13 @@ header h1 .small {
     display: flex;
     align-items: center;
     gap: 15px;
+
+    position: absolute;
+    bottom: 0;
+
     width: 100%;
     height: 40px;
     padding: 0px 10px;
-    background-color: #fff;
-    box-shadow: 0px 4px 5px #424242;
 }
 
 .main_nav a {
@@ -74,15 +77,16 @@ main div {
     justify-content: center;
     height: 70vh;
     background-size: cover;
-    margin: 5px 0px 5px 0px;
+    /* margin-bottom: 5px; */
     /* border-radius: 10px; */
-    box-shadow: 0px 4px 5px #424242;
+    /* box-shadow: 0px 4px 5px #424242; */
 }
 
 main div .transparence {
     margin-top: -2px;
     width: 100%;
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.719), rgba(0, 0, 0, 0.075));
+    /* background-image: linear-gradient(to top, rgba(0, 0, 0, 0.719), rgba(0, 0, 0, 0.075)); */
+    background-color: #bdd4ff;
 }
 
 main div .title{
@@ -203,7 +207,7 @@ main div .content ul::-webkit-scrollbar-thumb {
     border-radius: 5px;
 }
 
-.bg_1 {
+/* .bg_1 {
     background-image: url(../imgs/1.png);
 }
 .bg_2 {
@@ -214,7 +218,7 @@ main div .content ul::-webkit-scrollbar-thumb {
 }
 .bg_4 {
     background-image: url(../imgs/4.jpg);
-}
+} */
 
 #image_view {
     position: fixed;

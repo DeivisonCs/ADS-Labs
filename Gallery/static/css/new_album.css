@@ -1,8 +1,8 @@
 body {
     height: fit-content;
     padding-bottom: 40px;
-    /* background-color: #fff; */
-    background-image: linear-gradient(to top, rgba(54, 54, 54, 0.644), #e7e7e7, rgb(255, 255, 255));
+    background-color: #bdd4ff;
+    /* background-image: linear-gradient(to top, rgba(54, 54, 54, 0.644), #e7e7e7, rgb(255, 255, 255)); */
 }
 
 .must_fill::after {
@@ -28,7 +28,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url(../imgs/7.1.jpg);
+    position: relative;
+    background-image: url(../imgs/8.jpg);
     background-size: contain;
     background-repeat: no-repeat;
     /* opacity: .9; */
@@ -53,10 +54,13 @@ header h1 .small {
     display: flex;
     align-items: center;
     gap: 15px;
+
+    position: absolute;
+    bottom: 0;
+
     width: 100%;
     height: 40px;
     padding: 0px 10px;
-    background-color: #7575758c;
 }
 
 .main_nav a {

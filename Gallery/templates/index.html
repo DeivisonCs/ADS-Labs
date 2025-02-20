@@ -20,12 +20,13 @@
 
     <header class="img_on_bg">
         <h1><span class="small">My</span>Gallery</h1>
+        
+        <nav class="main_nav">
+            {% if user.is_authenticated %}
+            <a href="{% url 'new_album' %}">New Album <span class="glyphicon glyphicon-plus"></span></a>
+            {% endif %}
+        </nav>
     </header>
-    <nav class="main_nav">
-        {% if user.is_authenticated %}
-        <a href="{% url 'new_album' %}">New Album <span class="glyphicon glyphicon-plus"></span></a>
-        {% endif %}
-    </nav>
 
     {% if messages %}
     <ul class="messages">
