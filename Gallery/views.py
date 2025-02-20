@@ -29,6 +29,11 @@ def new_album(request, pk=''):
             post.title = request.POST['title']
             post.text = request.POST['text']
             
+            imagens = request.FILES.getlist('imgs')
+            for img in imagens:
+                img_file = Img_Files.objects.create(img=img)
+                post.posted_imgs.add(img_file)
+            
             post.save()
             return redirect('view_album', pk=post.pk)
         
