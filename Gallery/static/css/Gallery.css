@@ -1,7 +1,7 @@
 
 body {
     height: 100vh;
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.753), rgba(0, 0, 0, 0.281));
+    background-color: #bdd4ff;
 }
 
 ::-webkit-scrollbar {
